@@ -1,5 +1,7 @@
 package com.apap.tu04.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +58,13 @@ public class FlightController {
 	private String editFlightSubmit(@ModelAttribute FlightModel flight, Long id) {
 		flightService.addFlight(flight);
 		return "update";
+	}
+	
+	@RequestMapping(value = "/flight/all", method = RequestMethod.GET)
+	private String all(Model model) {
+		List <FlightModel> archive = flightService.listAll();
+		model.addAttribute("flight", archive);
+		return "view-flight";
 	}
 	
 }
